@@ -16,7 +16,7 @@ public class vocabBuilderGame
     public static  playerInfo player = new playerInfo();
     public static  loginController logIn = new loginController();
       
-    public static ArrayList<playerInfo> playerList = new ArrayList<playerInfo>();
+   
      
     // newplayer = new playerInfo[player.getNumberOfPlayers()];
     

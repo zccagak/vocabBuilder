@@ -1,1 +1,3 @@
 USERS,PASSWORD
+maxim,nethercott
+george,kiddo

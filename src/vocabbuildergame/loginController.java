@@ -3,13 +3,22 @@ package vocabbuildergame;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
-import static vocabbuildergame.vocabBuilderGame.isRegistered;
-import static vocabbuildergame.vocabBuilderGame.loggedIn;
-import static vocabbuildergame.vocabBuilderGame.playerList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class loginController 
 {
+    public static Boolean isRegistered= false;
+    public static Boolean loggedIn =false;
+    
+     public static ArrayList<playerInfo> playerList = new ArrayList<playerInfo>();
+    
     
     public static void logIn() 
   { 
@@ -36,7 +45,8 @@ public class loginController
             if(info.userName.contains(userNameCheck) && info.password.contains(passwordCheck))
             {
                 System.out.println("\tYou are logged in\n");
-                loggedIn = true;            
+                loggedIn = true;    
+                break;
             }
             else if(loggedIn ==false)
             {
@@ -48,6 +58,7 @@ public class loginController
 
 public static void register() 
     {
+        playerInfo player = new playerInfo();
     
         Scanner scan = new Scanner(System.in);
   
