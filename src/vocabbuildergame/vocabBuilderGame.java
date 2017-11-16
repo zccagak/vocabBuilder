@@ -1,25 +1,31 @@
 package vocabbuildergame;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class vocabBuilderGame
 {
   
     public static  playerInfo player = new playerInfo();
-  
-  
+    public static  loginController logIn = new loginController();
       
     public static ArrayList<playerInfo> playerList = new ArrayList<playerInfo>();
      
-     // newplayer = new playerInfo[player.getNumberOfPlayers()];
+    // newplayer = new playerInfo[player.getNumberOfPlayers()];
     
     public String userNameInput;
     public String passwordInput;
-		public static boolean loggedIn;
-  	public static boolean isRegistered;
+    public static boolean loggedIn;
+    public static boolean isRegistered;
   
-  public static void main(String[] args)
+  public static void main(String[] args) throws IOException
     {
        playerInfo thePlayer = new playerInfo();
       
@@ -38,17 +44,18 @@ public class vocabBuilderGame
             System.out.println("\t\tPlay the Game (P)");
             System.out.println("\t\tShow the Leaderboard (B)");
             System.out.println("\t\tQuit (Q)");
+            System.out.println("\t\tTest (T)");
             System.out.print("\n\tPlease choose an option:_");
             selection = scan.next().charAt(0);
             switch (selection)
             {
                 case 'l':
                 case 'L':
-                logIn();
+                logIn.logIn();
                     break;
                 case 'r':
                 case 'R':
-                register();
+                logIn.register();
                     break;
                 case 'a':
                 case 'A':
@@ -62,6 +69,10 @@ public class vocabBuilderGame
                 case 'B':
                 leaderBoard();
                     break;
+                case 't':
+                case 'T':
+                Test();
+                    break;
                 
 
             }
@@ -69,108 +80,8 @@ public class vocabBuilderGame
         System.out.println("\tPROGRAM ENDED\n");
     }  
   
-public static void register() 
-  {
-      
-      
-  Scanner scan = new Scanner(System.in);
-  
-        System.out.print("\n\tEnter a username ");
-        player.setUserName(scan.next());
-        
-        
-       
-        System.out.print("\n\tEnter a password ");
-        player.setPassword(scan.next());
-        
-        
-        
-        
-     
-        
-        
-     isRegistered = false;
-    
-    while(isRegistered==false){
-        
-        if(player.getPassword().length() <5 || player.getPassword().length() >15){
-            System.out.println("\n please enter a password between 5 and 15 characters ");
-            register();
-            
-        }
-    
-        else{
-             playerInfo players = new playerInfo(player.getUserName(),player.getPassword());
-             playerList.add(players);
-            System.out.println("\t \nyou have registered");
-            isRegistered = true;
-        }
-    }
-        
-/*    }
-        while (password.length() < 5 || password.length() > 15)
-      {
-        System.out.println("\n\tYour password needs to be between 5 and 15 characters.");
-        System.out.println("\n\tPlease enter a new password: ");
-        player.setPassword(scan.nextLine());
-      }
-*/  
-  
-
-      System.out.println(playerList);
-
-  }
 
 
-
-  public static void logIn() 
-  { 
-      String userNameCheck = "";
-      String passwordCheck = "";
-    
-    	Scanner scan = new Scanner(System.in);  
-      
-    if (isRegistered == true)
-     {
-         
-        System.out.print("\n\tEnter your username ");
-        userNameCheck = scan.next();
-            
-        
-        
-        
-        System.out.print("\n\tEnter your password ");
-        passwordCheck = scan.next();
-      
-     }
-        
-      // cant use == here as this checks if theyre from the same memory address - which they would never be so the prog. would always run else
-      for (playerInfo info : playerList) {
-          if(info.userName.contains(userNameCheck) && info.password.contains(passwordCheck)){
-              System.out.println("\n\tYou are logged in\n");
-             
-                    loggedIn = true;
-                     
-          }
-      
-            
-   
-      
-          else if(loggedIn ==false){
-              System.out.println("Username or password incorrect");
-          }
-      
-       
-      
-         
-      }
-                     
-                     
-     
-      
-  }
-  
-  
   // this will end the program as we haven't writen any code for what the game does yet
   public static void about()
   {
@@ -178,7 +89,8 @@ public static void register()
   }
  
   // no code yet
-  public static void theGame(){
+  public static void theGame()
+  {
     if (loggedIn == true)
     {
       System.out.println("\t\nYou may play the game");
@@ -191,9 +103,19 @@ public static void register()
   }
    
  // this will call informatio from the text file and create a leader board
-  public static void leaderBoard(){
+  public static void leaderBoard()
+  {
     System.out.println("\tPROGRAM ENDED\n");
     System.exit(0);
+  }
+  
+  public static void Test()
+  {
+      System.out.println(player.getUserName() + "," + player.getPassword());
+      if (isRegistered == true)
+      {
+          System.out.println("they are registered ");
+      }
   }
   
 }

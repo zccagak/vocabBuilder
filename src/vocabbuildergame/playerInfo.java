@@ -46,17 +46,11 @@ public class playerInfo
 
     @Override
     public String toString() {
-        return "playerInfo{ userName=" + userName + ", password=" + password + '}';
+        return userName + "," + password ;
     }
 
-  
-  
-    
-    
-   
-  
-  
 
+    
 
 }
 
