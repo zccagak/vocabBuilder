@@ -14,17 +14,20 @@ import java.util.logging.Logger;
 
 public class loginController 
 {
-    public static Boolean isRegistered= false;
-    public static Boolean loggedIn =false;
+    public static Boolean isRegistered = false;
+    public static Boolean loggedIn = false;
     
      public static ArrayList<playerInfo> playerList = new ArrayList<playerInfo>();
     
     
-    public static void logIn() 
+    public static void logIn() throws FileNotFoundException 
   { 
-      String userNameCheck = "";
-      String passwordCheck = "";
-    
+      
+        String userNameCheck = "";
+        String passwordCheck = "";
+        
+        reader();
+        
     	Scanner scan = new Scanner(System.in);  
       
         if (isRegistered == true)
@@ -45,7 +48,7 @@ public class loginController
             if(info.userName.contains(userNameCheck) && info.password.contains(passwordCheck))
             {
                 System.out.println("\tYou are logged in\n");
-                loggedIn = true;    
+                loggedIn = true;
                 break;
             }
             else if(loggedIn ==false)
@@ -110,5 +113,16 @@ public static void writer() throws FileNotFoundException, IOException
   
     }
 
+public static void reader() throws FileNotFoundException
+    {        
+        
+        Scanner s = new Scanner(new File("/Users/georgekidd/Desktop/vocabBuilder/src/vocabbuildergame/playerInfo.txt"));
+        ArrayList<playerInfo> playerList = new ArrayList<playerInfo>();
+        while (s.hasNext())
+        {
+            playerInfo.add(s.next());
+        }
+            s.close();
 
+    }
 }
